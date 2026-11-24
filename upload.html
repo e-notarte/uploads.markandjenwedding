@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Photos & Videos | Mark Angelo & Jenschel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold-primary: #d4af37;
+      --gold-gradient: linear-gradient(135deg, #c5a059 0%, #ebd88f 40%, #c59e4b 70%, #996e25 100%);
+      --ivory-bg: #fcfbf7;
+      --ivory-soft: #f7f1df;
+      --gold-text: #7d6431;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f2ecd9;
+      background-image:
+        radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.9) 0%, rgba(247, 241, 223, 0.85) 70%),
+        linear-gradient(180deg, #fcfbf7 0%, #eee6cb 100%);
+      font-family: 'Montserrat', sans-serif;
+      color: #5f5438;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(252, 251, 247, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(197, 160, 89, 0.55);
+      border-radius: 20px;
+      padding: 36px 24px 30px 24px;
+      box-shadow: 0 20px 45px rgba(95, 84, 56, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(197, 160, 89, 0.22);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .monogram-badge {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 16px auto;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold-primary);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(235, 216, 143, 0.12);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    }
+
+    .monogram-badge img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    }
+
+    .eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-text);
+      margin-bottom: 6px;
+    }
+
+    .couple-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      font-weight: 400;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .date-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: #99804b;
+      margin-bottom: 22px;
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ebd88f, transparent);
+      margin: 0 auto 22px auto;
+    }
+
+    .welcome-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #68604d;
+      margin-bottom: 26px;
+      font-weight: 300;
+    }
+
+    .upload-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 50px;
+      background: var(--gold-gradient);
+      color: #3f351e;
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4), 0 2px 4px rgba(0,0,0,0.2);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .upload-btn:hover, .upload-btn:active {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.55);
+    }
+
+    .upload-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .instructions-card {
+      margin-top: 28px;
+      background: rgba(197, 160, 89, 0.08);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: left;
+      border: 1px solid rgba(197, 160, 89, 0.22);
+    }
+
+    .instructions-title {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--gold-text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 12.5px;
+      color: #68604d;
+      line-height: 1.45;
+    }
+
+    .step-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(197, 160, 89, 0.18);
+      color: #7d6431;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 11px;
+      color: #998d70;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-note a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Monogram Badge -->
+    <div class="monogram-badge">
+      <img src="Couple Logo.png" alt="Mark & Jenschel Monogram" onerror="this.outerHTML='<span style=\'font-family:Cinzel;color:#ecd581;font-weight:bold;font-size:22px;\'>M &amp; J</span>'">
+    </div>
+
+    <div class="eyebrow">Wedding Celebration</div>
+    <h1 class="couple-title">Mark Angelo &amp; Jenschel</h1>
+    <div class="date-tag">DECEMBER 12, 2026</div>
+    <div class="divider"></div>
+
+    <p class="welcome-text">
+      Thank you for celebrating with us! Please share all the memorable moments, candid photos, and videos you captured today so we can keep them in our wedding album.
+    </p>
+
+    <input id="fileInput" type="file" accept="image/*,video/*" multiple style="display:none">
+    <button id="uploadBtn" type="button" class="upload-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+      </svg>
+      Choose Photos or Videos
+    </button>
+    <div id="uploadStatus" class="footer-note" role="status" aria-live="polite"></div>
+    <div id="uploadProgress" style="display:none;margin-top:16px;">
+      <div style="height:8px;background:rgba(197,160,89,.18);border-radius:20px;overflow:hidden;">
+        <div id="uploadProgressBar" style="width:0;height:100%;background:linear-gradient(90deg,#c5a059,#ebd88f);transition:width .2s;"></div>
+      </div>
+      <div id="uploadProgressText" style="margin-top:8px;font-size:12px;color:#68604d;"></div>
+    </div>
+
+    <!-- Quick How-To Steps -->
+    <div class="instructions-card">
+      <div class="instructions-title">
+        <span>📸</span> HOW TO UPLOAD IN 3 SECONDS
+      </div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>Tap <strong>"Choose Photos or Videos"</strong>, then select your favorites.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>Choose <strong>Library</strong> to upload existing iPhone photos or videos, or <strong>Take Photo or Video</strong> to capture a new moment.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>Tap <strong>Add</strong>, wait for the confirmation, and repeat for more media.</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Album maintained by <a href="mailto:deverajenschel22@gmail.com">deverajenschel22@gmail.com</a>
+    </div>
+  </div>
+
+  <script>
+    const DEFAULT_UPLOAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxPZtyq3yAIeDCeFnH8XR6JEK_pCFOk8LQqVgB_13bdAbweZJUW6Umyef5JAiamgA3G/exec';
+    const MAX_FILE_BYTES = 18 * 1024 * 1024;
+
+    const fileInput = document.getElementById('fileInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const progress = document.getElementById('uploadProgress');
+    const progressBar = document.getElementById('uploadProgressBar');
+    const progressText = document.getElementById('uploadProgressText');
+
+    function getUploadEndpoint() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('endpoint') || DEFAULT_UPLOAD_ENDPOINT;
+    }
+
+    function setStatus(message) {
+      uploadStatus.textContent = message;
+    }
+
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    uploadBtn.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', async () => {
+      const endpoint = getUploadEndpoint();
+      if (!endpoint) {
+        setStatus('Upload service is not configured yet.');
+        fileInput.value = '';
+        return;
+      }
+
+      const files = Array.from(fileInput.files || []);
+      if (!files.length) return;
+
+      const oversized = files.filter(file => file.size > MAX_FILE_BYTES);
+      if (oversized.length) {
+        setStatus('One or more files are larger than 18 MB. Choose a smaller size or send the video from iPhone Photos.');
+        fileInput.value = '';
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      progress.style.display = 'block';
+      let uploaded = 0;
+
+      for (const file of files) {
+        try {
+          progressText.textContent = `Uploading ${uploaded + 1} of ${files.length}: ${file.name}`;
+          const data = await fileToBase64(file);
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              fileName: file.name,
+              mimeType: file.type || 'application/octet-stream',
+              data
+            })
+          });
+
+          if (!response.ok) throw new Error(`Upload failed (${response.status})`);
+          const result = await response.json();
+          if (!result.ok) throw new Error(result.error || 'Upload failed');
+          uploaded++;
+          progressBar.style.width = `${Math.round((uploaded / files.length) * 100)}%`;
+        } catch (error) {
+          setStatus(`Upload stopped: ${error.message}`);
+          uploadBtn.disabled = false;
+          progressText.textContent = '';
+          fileInput.value = '';
+          return;
+        }
+      }
+
+      progressText.textContent = `Uploaded ${uploaded} of ${files.length} file${files.length === 1 ? '' : 's'} successfully`;
+      setStatus('Thank you! Your photos and videos have been uploaded.');
+      uploadBtn.disabled = false;
+      fileInput.value = '';
+      setTimeout(() => {
+        progress.style.display = 'none';
+        progressBar.style.width = '0%';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
