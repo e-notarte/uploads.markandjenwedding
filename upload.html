@@ -24,12 +24,6 @@
 
     body {
       background-color: #f2ecd9;
-      background-image:
-        linear-gradient(rgba(252, 251, 247, 0.3), rgba(238, 230, 203, 0.3)),
-        url("Background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       font-family: 'Montserrat', sans-serif;
       color: #5f5438;
       min-height: 100vh;
@@ -44,7 +38,9 @@
     .card {
       width: 100%;
       max-width: 480px;
-      background: rgba(252, 251, 247, 0.96);
+      background:
+        linear-gradient(rgba(252, 251, 247, 0.84), rgba(252, 251, 247, 0.84)),
+        url("Background.jpg") center / cover no-repeat;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(197, 160, 89, 0.55);
